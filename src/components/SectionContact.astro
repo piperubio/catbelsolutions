@@ -146,6 +146,8 @@ const t = useTranslations(lang);
 </section>
 
 <script>
+  import { actions } from "astro:actions";
+
   const form = document.getElementById("contact-form") as HTMLFormElement;
   const alertBox = document.getElementById("form-alert");
   const submitBtn = document.getElementById("submit-btn") as HTMLButtonElement;
@@ -158,22 +160,19 @@ const t = useTranslations(lang);
     }
 
     submitBtn.disabled = true;
+    const originalBtnText = submitBtn.textContent;
     submitBtn.textContent = "SENDING...";
     alertBox.classList.add("hidden");
 
     const formData = new FormData(form);
 
     try {
-      const apiUrl = "/phpMailer/contact.php";
+      const { data, error } = await actions.sendContactEmail(formData);
 
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        body: formData,
-      });
-
-      if (response.status >= 300) {
+      if (error) {
         throw new Error(
-          "Hemos tenido un problema. Por favor vuelve a intentarlo."
+          error.message ||
+            "Hemos tenido un problema. Por favor vuelve a intentarlo."
         );
       }
 
@@ -188,7 +187,7 @@ const t = useTranslations(lang);
       alertBox.classList.add("bg-red-500");
     } finally {
       submitBtn.disabled = false;
-      submitBtn.textContent = "SUBMIT";
+      submitBtn.textContent = originalBtnText || "SUBMIT";
     }
   });
 </script>
