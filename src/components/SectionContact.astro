@@ -70,7 +70,15 @@ const t = useTranslations(lang);
       <div
         class="bg-white rounded-[32px] p-8 shadow-[0_25px_80px_-40px_rgba(15,32,39,0.5)] border border-secondary/5"
       >
-        <form id="contact-form" class="flex flex-col gap-5" autocomplete="off">
+        <form
+          id="contact-form"
+          class="flex flex-col gap-5"
+          autocomplete="off"
+          data-msg-success={t("contact.form.success")}
+          data-msg-error-generic={t("contact.form.error.generic")}
+          data-msg-error-occurred={t("contact.form.error.occurred")}
+          data-msg-sending={t("contact.form.sending")}
+        >
           <div
             id="form-alert"
             class="hidden mb-4 p-4 rounded text-white font-bold text-center"
@@ -159,9 +167,12 @@ const t = useTranslations(lang);
       return;
     }
 
+    const { msgSuccess, msgErrorGeneric, msgErrorOccurred, msgSending } =
+      form.dataset;
+
     submitBtn.disabled = true;
     const originalBtnText = submitBtn.textContent;
-    submitBtn.textContent = "SENDING...";
+    submitBtn.textContent = msgSending || "SENDING...";
     alertBox.classList.add("hidden");
 
     const formData = new FormData(form);
@@ -172,17 +183,20 @@ const t = useTranslations(lang);
       if (error) {
         throw new Error(
           error.message ||
+            msgErrorGeneric ||
             "Hemos tenido un problema. Por favor vuelve a intentarlo."
         );
       }
 
-      alertBox.textContent = "Mensaje Enviado Correctamente";
+      alertBox.textContent = msgSuccess || "Mensaje Enviado Correctamente";
       alertBox.classList.remove("hidden", "bg-red-500");
       alertBox.classList.add("bg-green-500");
       form.reset();
     } catch (error) {
       alertBox.textContent =
-        error instanceof Error ? error.message : "An error occurred";
+        error instanceof Error
+          ? error.message
+          : msgErrorOccurred || "An error occurred";
       alertBox.classList.remove("hidden", "bg-green-500");
       alertBox.classList.add("bg-red-500");
     } finally {
