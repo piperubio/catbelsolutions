@@ -1,0 +1,142 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const navItems = [
+  { text: t("nav.home"), link: "#home" },
+  { text: t("nav.products"), link: "#products" },
+  { text: t("nav.industries"), link: "#industries" },
+  { text: t("nav.about"), link: "#about" },
+  { text: t("nav.contact"), link: "#contact" },
+];
+---
+
+<header
+  id="main-header"
+  class="fixed top-0 w-full z-50 transition-all duration-400 bg-white shadow-md h-[100px]"
+>
+  <div class="container mx-auto px-4 h-full flex justify-between items-center">
+    <a href={lang === 'es' ? '/es' : '/'} class="flex items-center">
+      <img
+        src="/img/logo.webp"
+        alt="Catbel Solutions Logo Header"
+        class="w-[200px] md:w-[250px]"
+      >
+    </a>
+
+    <div class="flex items-center gap-4">
+      <!-- Desktop Menu -->
+      <nav class="hidden md:flex items-center space-x-4">
+        {navItems.map((item) => (
+          <a href={item.link} class="text-gray-700 hover:text-primary font-medium uppercase px-3 py-2 rounded-md transition-colors">
+            {item.text}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Language Selector -->
+      <a
+        href={lang === 'en' ? '/es' : '/'}
+        class="text-gray-700 hover:text-primary font-bold uppercase px-3 py-2 rounded-md transition-colors border border-gray-300 hover:border-primary"
+      >
+        {lang === 'en' ? 'ES' : 'EN'}
+      </a>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden text-gray-700 focus:outline-none"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-8 w-8"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Drawer -->
+  <div
+    id="mobile-menu"
+    class="fixed inset-0 z-40 transform translate-x-full transition-transform duration-300 ease-in-out md:hidden"
+  >
+    <div
+      class="absolute inset-0 bg-black opacity-50"
+      id="mobile-menu-overlay"
+    ></div>
+    <div
+      class="absolute right-0 top-0 h-full w-64 bg-white shadow-lg flex flex-col p-6"
+    >
+      <div class="flex justify-end mb-6">
+        <button id="close-menu-btn" class="text-gray-700">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+      <nav class="flex flex-col space-y-4">
+        {navItems.map((item) => (
+          <a href={item.link} class="text-gray-800 hover:text-primary text-lg font-medium mobile-link">
+            {item.text}
+          </a>
+        ))}
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById("main-header");
+  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+  const closeMenuBtn = document.getElementById("close-menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
+  const mobileLinks = document.querySelectorAll(".mobile-link");
+
+  // Scroll effect
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 50) {
+      header?.classList.remove("h-[100px]");
+      header?.classList.add("h-[65px]");
+    } else {
+      header?.classList.add("h-[100px]");
+      header?.classList.remove("h-[65px]");
+    }
+  });
+
+  // Mobile menu toggle
+  function toggleMenu() {
+    mobileMenu?.classList.toggle("translate-x-full");
+  }
+
+  mobileMenuBtn?.addEventListener("click", toggleMenu);
+  closeMenuBtn?.addEventListener("click", toggleMenu);
+  mobileMenuOverlay?.addEventListener("click", toggleMenu);
+
+  for (const link of mobileLinks) {
+    link.addEventListener("click", toggleMenu);
+  }
+</script>

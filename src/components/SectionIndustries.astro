@@ -1,0 +1,52 @@
+---
+import {
+  getLangFromUrl,
+  industries as industriesData,
+  useTranslations,
+} from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const industries = industriesData[lang];
+---
+
+<section id="industries" class="relative overflow-hidden">
+  <div class="absolute inset-0 bg-secondary"></div>
+  <div class="absolute inset-x-0 top-12 h-40 bg-primary/40 blur-[120px]"></div>
+  <div
+    class="container relative mx-auto px-6 py-20 md:py-28 text-white space-y-14"
+  >
+    <div class="max-w-3xl">
+      <p class="text-sm uppercase tracking-[0.5em] text-primary">
+        {t('industries.subtitle')}
+      </p>
+      <h3 class="text-4xl sm:text-5xl font-semibold leading-tight mt-4">
+        {t('industries.title')}
+      </h3>
+      <p class="mt-6 text-white/80">{t('industries.description')}</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+      {industries.map((industry) => (
+        <article class="relative rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md p-6 flex flex-col gap-4 h-full">
+          <div class="rounded-2xl overflow-hidden h-44">
+            <img src={industry.img} alt={industry.title} class="h-full w-full object-cover" loading="lazy" />
+          </div>
+          <div class="flex-1 space-y-3">
+            <h4 class="text-2xl font-semibold">{industry.title}</h4>
+            <p class="text-white/80 text-sm leading-relaxed">{industry.description}</p>
+          </div>
+          <div class="flex items-center justify-between text-sm">
+            <span class="font-semibold text-primary">{industry.kpi}</span>
+            <a href="#contact" class="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors">
+              {t('industries.cta')}
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

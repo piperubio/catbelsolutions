@@ -1,0 +1,87 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section id="home" class="relative overflow-hidden text-white py-20 md:py-28">
+  <div
+    class="absolute inset-0 bg-cover bg-center"
+    style="background-image: url('/hero/hero.webp'); background-color: #7fc7d9;"
+  ></div>
+  <div
+    class="absolute inset-0 bg-gradient-to-br from-black/70 via-[#0F2027]/85 to-[#203A43]/80"
+  ></div>
+  <div
+    class="absolute -right-24 top-10 h-72 w-72 rounded-full bg-primary/30 blur-3xl"
+  ></div>
+
+  <div class="container relative z-10 mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+      <div class="space-y-8">
+        <div>
+          <h1
+            class="text-4xl md:text-5xl xl:text-6xl mt-16 font-semibold leading-tight"
+          >
+            {t('hero.title')}
+          </h1>
+          <p class="mt-6 text-base md:text-lg text-white/85">
+            {t('hero.description')}
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a
+            href="#contact"
+            class="bg-primary hover:bg-white text-white hover:text-primary font-semibold px-6 py-3 rounded-lg shadow-lg text-center transition-colors"
+          >
+            {t('hero.cta.contact')}
+          </a>
+          <a
+            href="#products"
+            class="border border-white/40 hover:border-white px-6 py-3 rounded-lg text-center font-semibold transition-colors"
+          >
+            {t('hero.cta.products')}
+          </a>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6 text-sm text-white/80">
+          <div>
+            <p class="text-3xl font-semibold text-white">
+              {t('hero.stat.247')}
+            </p>
+            <p>{t('hero.stat.247.desc')}</p>
+          </div>
+          <div>
+            <p class="text-3xl font-semibold text-white">
+              {t('hero.stat.years')}
+            </p>
+            <p>{t('hero.stat.years.desc')}</p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 p-8 lg:p-10 space-y-6"
+      >
+        <h2 class="text-2xl font-semibold">{t('hero.why.title')}</h2>
+        <ul class="space-y-4 text-white/80">
+          <li class="flex gap-3">
+            <span class="mt-1 h-2 w-2 rounded-full bg-primary"></span>
+            <span>{t('hero.why.list.1')}</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="mt-1 h-2 w-2 rounded-full bg-primary"></span>
+            <span>{t('hero.why.list.2')}</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="mt-1 h-2 w-2 rounded-full bg-primary"></span>
+            <span>{t('hero.why.list.3')}</span>
+          </li>
+        </ul>
+        <p class="text-sm text-white/60">{t('hero.why.footer')}</p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,32 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section id="about" class="flex overflow-hidden">
+  <div
+    class="container mx-auto px-4 mt-30 mb-30 flex flex-col relative md:mt-20 md:mb-16"
+  >
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+      <div class="hidden md:block md:col-span-1"></div>
+      <div class="col-span-12 md:col-span-4 flex flex-col justify-center">
+        <h4
+          class="text-3xl sm:text-4xl mb-4 text-center md:text-left font-normal uppercase"
+        >
+          {t('about.title')}
+        </h4>
+        <p class="text-justify text-lg mb-4">{t('about.description')}</p>
+      </div>
+      <div class="col-span-12 md:col-span-6 flex items-center justify-center">
+        <img
+          src="/img/team.webp"
+          alt="Equipo de Trabajo"
+          class="w-full h-auto max-w-[600px] rounded-lg shadow-lg"
+        >
+      </div>
+      <div class="hidden md:block md:col-span-1"></div>
+    </div>
+  </div>
+</section>

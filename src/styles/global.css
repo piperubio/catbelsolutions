@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #f7941d;
+  --color-secondary: #3b2313;
+  --color-background: #f4f4f4;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  background-color: var(--color-background);
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: 100px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@layer utilities {
+  .bg-gradient-radial {
+    background-image: radial-gradient(
+      ellipse at center,
+      var(--tw-gradient-stops)
+    );
+  }
+}
