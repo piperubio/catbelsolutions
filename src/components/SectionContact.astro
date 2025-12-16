@@ -13,14 +13,14 @@ const t = useTranslations(lang);
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
       <div class="space-y-6">
         <p class="text-primary font-semibold uppercase tracking-[0.5em]">
-          {t('contact.sales')}
+          {t("contact.sales")}
         </p>
         <h3
           class="text-4xl sm:text-5xl text-secondary font-semibold leading-tight"
         >
-          {t('contact.title')}
+          {t("contact.title")}
         </h3>
-        <p class="text-secondary/80 text-lg">{t('contact.description')}</p>
+        <p class="text-secondary/80 text-lg">{t("contact.description")}</p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <a
@@ -28,13 +28,13 @@ const t = useTranslations(lang);
             class="bg-white rounded-2xl border border-secondary/10 p-5 flex flex-col gap-2 shadow-sm hover:shadow-lg transition-shadow"
           >
             <span class="text-xs uppercase text-secondary/60 tracking-wider"
-              >{t('contact.email.label')}</span
+              >{t("contact.email.label")}</span
             >
             <span class="text-lg font-semibold text-secondary break-words"
               >sales@catbel.solutions</span
             >
             <p class="text-xs text-secondary/70 leading-relaxed">
-              {t('contact.email.desc')}
+              {t("contact.email.desc")}
             </p>
           </a>
           <a
@@ -44,13 +44,13 @@ const t = useTranslations(lang);
             class="bg-secondary text-white rounded-2xl p-5 flex flex-col gap-2 shadow-lg hover:shadow-xl transition-shadow"
           >
             <span class="text-xs uppercase text-white/70 tracking-wider"
-              >{t('contact.whatsapp.label')}</span
+              >{t("contact.whatsapp.label")}</span
             >
             <span class="text-lg font-semibold text-white break-words"
               >+61 404 241 062</span
             >
             <p class="text-xs text-white/80 leading-relaxed">
-              {t('contact.whatsapp.desc')}
+              {t("contact.whatsapp.desc")}
             </p>
           </a>
         </div>
@@ -58,11 +58,11 @@ const t = useTranslations(lang);
         <ul class="space-y-3 text-secondary/80 text-sm">
           <li class="flex gap-3">
             <span class="mt-1 h-2 w-2 rounded-full bg-primary"></span>
-            <span>{t('contact.list.1')}</span>
+            <span>{t("contact.list.1")}</span>
           </li>
           <li class="flex gap-3">
             <span class="mt-1 h-2 w-2 rounded-full bg-primary"></span>
-            <span>{t('contact.list.2')}</span>
+            <span>{t("contact.list.2")}</span>
           </li>
         </ul>
       </div>
@@ -78,7 +78,7 @@ const t = useTranslations(lang);
 
           <div class="flex flex-col gap-2">
             <label for="name" class="text-secondary font-semibold">
-              {t('contact.form.name')}
+              {t("contact.form.name")}
             </label>
             <input
               type="text"
@@ -86,13 +86,13 @@ const t = useTranslations(lang);
               name="name"
               required
               class="rounded-2xl border border-secondary/20 px-4 py-3 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-              placeholder={t('contact.form.name.placeholder')}
+              placeholder={t("contact.form.name.placeholder")}
             >
           </div>
 
           <div class="flex flex-col gap-2">
             <label for="email" class="text-secondary font-semibold">
-              {t('contact.form.email')}
+              {t("contact.form.email")}
             </label>
             <input
               type="email"
@@ -100,13 +100,13 @@ const t = useTranslations(lang);
               name="email"
               required
               class="rounded-2xl border border-secondary/20 px-4 py-3 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-              placeholder={t('contact.form.email.placeholder')}
+              placeholder={t("contact.form.email.placeholder")}
             >
           </div>
 
           <div class="flex flex-col gap-2">
             <label for="phone" class="text-secondary font-semibold">
-              {t('contact.form.phone')}
+              {t("contact.form.phone")}
             </label>
             <input
               type="tel"
@@ -114,13 +114,13 @@ const t = useTranslations(lang);
               name="phone"
               required
               class="rounded-2xl border border-secondary/20 px-4 py-3 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-              placeholder={t('contact.form.phone.placeholder')}
+              placeholder={t("contact.form.phone.placeholder")}
             >
           </div>
 
           <div class="flex flex-col gap-2">
             <label for="message" class="text-secondary font-semibold">
-              {t('contact.form.message')}
+              {t("contact.form.message")}
             </label>
             <textarea
               id="message"
@@ -128,16 +128,16 @@ const t = useTranslations(lang);
               rows="4"
               required
               class="rounded-2xl border border-secondary/20 px-4 py-3 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-              placeholder={t('contact.form.message.placeholder')}
+              placeholder={t("contact.form.message.placeholder")}
             ></textarea>
           </div>
 
           <button
             type="submit"
             id="submit-btn"
-            class="bg-primary hover:bg-orange-600 text-white font-semibold py-3 rounded-2xl shadow-lg transition-colors disabled:opacity-50"
+            class="bg-primary hover:bg-orange-600 text-white font-semibold py-3 rounded-2xl shadow-lg transition-colors disabled:opacity-50 cursor-pointer"
           >
-            {t('contact.form.submit')}
+            {t("contact.form.submit")}
           </button>
         </form>
       </div>

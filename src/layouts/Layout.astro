@@ -1,5 +1,8 @@
 ---
 import "../styles/global.css";
+import Analytics from "@vercel/analytics/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
+
 import { getLangFromUrl } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
@@ -17,6 +20,8 @@ const lang = getLangFromUrl(Astro.url);
   <body>
     <slot/>
   </body>
+  <Analytics/>
+  <SpeedInsights/>
 </html>
 
 <style>
