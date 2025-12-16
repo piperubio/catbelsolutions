@@ -13,15 +13,18 @@ export const server = {
     }),
     handler: async (input) => {
       const resend = new Resend(import.meta.env.RESEND_API_KEY);
-      const contactEmail = import.meta.env.CONTACT_EMAIL;
+      const senderEmail = import.meta.env.SENDER_EMAIL;
+      const receiverEmail = import.meta.env.RECEIVER_EMAIL;
 
-      if (!contactEmail) {
-        throw new Error("CONTACT_EMAIL environment variable is not set");
+      if (!(receiverEmail && senderEmail)) {
+        throw new Error(
+          "RECEIVER_EMAIL or SENDER_EMAIL environment variable is not set"
+        );
       }
 
       const { data, error } = await resend.emails.send({
-        from: "Catbel Web <onboarding@resend.dev>",
-        to: [contactEmail],
+        from: `Catbel Web <${senderEmail}>`,
+        to: [receiverEmail],
         subject: `New Contact Form Submission from ${input.name}`,
         html: `
           <h2>New Contact Request</h2>
