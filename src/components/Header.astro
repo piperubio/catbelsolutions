@@ -18,7 +18,7 @@ const navItems = [
   class="fixed top-0 w-full z-50 transition-all duration-400 bg-white shadow-md h-[100px]"
 >
   <div class="container mx-auto px-4 h-full flex justify-between items-center">
-    <a href={lang === 'es' ? '/es' : '/'} class="flex items-center">
+    <a href={lang === "es" ? "/es" : "/"} class="flex items-center">
       <img
         src="/img/logo.webp"
         alt="Catbel Solutions Logo Header"
@@ -29,19 +29,24 @@ const navItems = [
     <div class="flex items-center gap-4">
       <!-- Desktop Menu -->
       <nav class="hidden md:flex items-center space-x-4">
-        {navItems.map((item) => (
-          <a href={item.link} class="text-gray-700 hover:text-primary font-medium uppercase px-3 py-2 rounded-md transition-colors">
-            {item.text}
-          </a>
-        ))}
+        {
+          navItems.map((item) => (
+            <a
+              href={item.link}
+              class="text-gray-700 hover:text-primary font-medium uppercase px-3 py-2 rounded-md transition-colors"
+            >
+              {item.text}
+            </a>
+          ))
+        }
       </nav>
 
       <!-- Language Selector -->
       <a
-        href={lang === 'en' ? '/es' : '/'}
+        href={lang === "en" ? "/es" : "/"}
         class="text-gray-700 hover:text-primary font-bold uppercase px-3 py-2 rounded-md transition-colors border border-gray-300 hover:border-primary"
       >
-        {lang === 'en' ? 'ES' : 'EN'}
+        {lang === "en" ? "ES" : "EN"}
       </a>
 
       <!-- Mobile Menu Button -->
@@ -61,50 +66,53 @@ const navItems = [
             stroke-linejoin="round"
             stroke-width="2"
             d="M4 6h16M4 12h16M4 18h16"
-          />
+          ></path>
         </svg>
       </button>
     </div>
   </div>
 
+  <!-- Mobile Menu Overlay -->
+  <div
+    id="mobile-menu-overlay"
+    class="fixed inset-0 z-40 bg-black opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out md:hidden"
+  ></div>
+
   <!-- Mobile Menu Drawer -->
   <div
     id="mobile-menu"
-    class="fixed inset-0 z-40 transform translate-x-full transition-transform duration-300 ease-in-out md:hidden"
+    class="fixed right-0 top-0 bottom-0 z-50 w-64 bg-white shadow-lg flex flex-col p-6 transform translate-x-full transition-transform duration-300 ease-in-out md:hidden"
   >
-    <div
-      class="absolute inset-0 bg-black opacity-50"
-      id="mobile-menu-overlay"
-    ></div>
-    <div
-      class="absolute right-0 top-0 h-full w-64 bg-white shadow-lg flex flex-col p-6"
-    >
-      <div class="flex justify-end mb-6">
-        <button id="close-menu-btn" class="text-gray-700">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+    <div class="flex justify-end mb-6">
+      <button id="close-menu-btn" class="text-gray-700">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          ></path>
+        </svg>
+      </button>
+    </div>
+    <nav class="flex flex-col space-y-4">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.link}
+            class="text-gray-800 hover:text-primary text-lg font-medium mobile-link"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-      </div>
-      <nav class="flex flex-col space-y-4">
-        {navItems.map((item) => (
-          <a href={item.link} class="text-gray-800 hover:text-primary text-lg font-medium mobile-link">
             {item.text}
           </a>
-        ))}
-      </nav>
-    </div>
+        ))
+      }
+    </nav>
   </div>
 </header>
 
@@ -129,7 +137,19 @@ const navItems = [
 
   // Mobile menu toggle
   function toggleMenu() {
-    mobileMenu?.classList.toggle("translate-x-full");
+    const isOpen = mobileMenu?.classList.contains("translate-x-full");
+
+    if (isOpen) {
+      // Open menu
+      mobileMenu?.classList.remove("translate-x-full");
+      mobileMenuOverlay?.classList.remove("opacity-0", "pointer-events-none");
+      mobileMenuOverlay?.classList.add("opacity-50");
+    } else {
+      // Close menu
+      mobileMenu?.classList.add("translate-x-full");
+      mobileMenuOverlay?.classList.add("opacity-0", "pointer-events-none");
+      mobileMenuOverlay?.classList.remove("opacity-50");
+    }
   }
 
   mobileMenuBtn?.addEventListener("click", toggleMenu);
